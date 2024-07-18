@@ -26,7 +26,10 @@ phases:
       - echo 'export PATH=$PWD/:$PATH' >> $HOME/.bashrc
       - echo `kubectl version --client`
       - python -m pip install --upgrade --force pip
-      - yum update && yum -y install jq && pip install --upgrade awscli
+      - sudo apt-get clean
+      - sudo apt-get update
+      - sudo apt-get install -y jq
+      - pip install --upgrade awscli
   pre_build:
     commands:
       - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
