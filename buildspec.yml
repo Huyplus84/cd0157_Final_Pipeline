@@ -26,12 +26,7 @@ phases:
       - echo 'export PATH=$PWD/:$PATH' >> $HOME/.bashrc
       - echo `kubectl version --client`
       - python -m pip install --upgrade --force pip
-      - yum install -y amazon-linux-extras
-      - amazon-linux-extras enable epel
-      - yum install -y epel-release
-      - yum update -y
-      - yum install -y jq
-      - pip install --upgrade awscli
+      - apt-get update -y && apt-get -y install jq && pip install --upgrade awscli
   pre_build:
     commands:
       - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
